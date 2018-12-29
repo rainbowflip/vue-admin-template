@@ -132,10 +132,6 @@ export default {
       this.listQuery.page = 1
       this.fetchData()
     },
-    goback(id){
-      console.log(id);
-      this.$router.go(-1)
-    },
     handleCreate(){
       console.log("handlecreate")
       this.$router.push({path:"/form/index"})
@@ -153,6 +149,13 @@ export default {
       //   })
       //   this.downloadLoading = false
       // })
+    },
+    gotoResults(id) {
+      this.$router.push({path:'/results/index',params:'id'})
+    },
+    goback(id){
+      console.log(id);
+      this.$router.go(-1)
     },
   }
 }
