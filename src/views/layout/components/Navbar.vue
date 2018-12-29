@@ -1,4 +1,5 @@
 <template>
+  <sticky class-name="sub-navbar">
   <el-menu class="navbar" mode="horizontal">
     <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/>
     <breadcrumb />
@@ -19,17 +20,21 @@
       </el-dropdown-menu>
     </el-dropdown>
   </el-menu>
+  </sticky>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
+import Sticky from '@/components/Sticky'
+
 
 export default {
   components: {
     Breadcrumb,
-    Hamburger
+    Hamburger,
+    Sticky
   },
   computed: {
     ...mapGetters([
