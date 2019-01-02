@@ -75,13 +75,13 @@ export const constantRouterMap = [
   {
   path: '/results',
   component: Layout,
-  name: 'results',
+  name: 'Results',
   children: [
       {
         path: 'index',
-        name: 'results',
+        name: 'Results',
         component: () => import('@/views/table/results'),
-        meta: { title: 'results', icon: 'table' }
+        meta: { title: 'results', icon: 'eye' }
       }
     ]
   },

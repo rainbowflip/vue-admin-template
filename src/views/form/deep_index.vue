@@ -1,5 +1,5 @@
 <template>
-    <Taskform :data="form"></Taskform>
+    <Taskform style="width:800px" :data="form"></Taskform>
 </template>
 <script>
 import Taskform from '@/components/Taskform/index'
@@ -22,4 +22,8 @@ export default {
 
 }
 </script>
+
+<style>
+
+</style>
 

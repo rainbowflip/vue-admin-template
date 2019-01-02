@@ -58,7 +58,7 @@
           type: undefined,
           sort: '+id'
         },
-        url:"http://95.163.194.215:5656/static_video/videos/11.mkv"
+        url:"http://localhost:9528/#/static_video/videos/11.mkv"
       }
     },
     created() {
