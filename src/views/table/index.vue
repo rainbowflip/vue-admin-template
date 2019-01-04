@@ -1,11 +1,11 @@
 <template>
   <div class="app-container">
-    <template class="filter-container">
+    <div class="filter-container">
       <el-input :placeholder="title" v-model="listQuery.title" size='small' style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter"/>
       <el-button class="filter-item" type="primary" size='small' icon="el-icon-search" @click="handleFilter"> search </el-button>
       <el-button class="filter-item" style="margin-left: 10px;" size='small' type="primary" icon="el-icon-edit" @click="handleCreate"> add </el-button>
       <el-button :loading="downloadLoading" class="filter-item" size='small' type="primary" icon="el-icon-download" @click="handleDownload"> export </el-button>
-    </template>
+    </div>
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -62,10 +62,10 @@
 
     <el-dialog title="edit task" :visible.sync="dialogFormVisible">
       <Taskform></Taskform>
-      <div slot="footer" class="dialog-footer">
+      <!-- <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
         <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
-      </div>
+      </div> -->
     </el-dialog>
   </div>
 </template>
@@ -99,7 +99,7 @@ export default {
         importance: undefined,
         title: undefined,
         type: undefined,
-        sort: '+id'
+        sort: '-id'
       },
       dialogFormVisible: false,
       downloadLoading: false,

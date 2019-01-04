@@ -4,6 +4,7 @@
       <el-radio-group v-model="form.resource">
         <el-radio label="Face"></el-radio>
         <el-radio label="Sports"></el-radio>
+        <el-button class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
       </el-radio-group>
     </el-form-item>
     <el-form-item label="任务名称">
@@ -49,6 +50,7 @@
 </template>
 
 <script>
+  import { settasks,settags } from "@/api/form"
   export default {
     name: 'Taskform',
     data() {
@@ -68,11 +70,45 @@
     },
     methods: {
       onSubmit() {
-        console.log('submit!')
+        settasks(this.form).then(response => {
+          console.log(response)
+        })
       },
       goback() {
         this.$router.go(-1)
+      },
+      showInput() {
+        this.inputVisible = true;
+        this.$nextTick(_ => {
+          this.$refs.saveTagInput.$refs.input.focus();
+        });
+      },
+
+      handleInputConfirm() {
+        let inputValue = this.inputValue;
+        if (inputValue) {
+          this.dynamicTags.push(inputValue);
+        }
+        this.inputVisible = false;
+        this.inputValue = '';
       }
     }
   }
 </script>
+<style>
+  .el-tag + .el-tag {
+    margin-left: 10px;
+  }
+  .button-new-tag {
+    margin-left: 10px;
+    height: 32px;
+    line-height: 30px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .input-new-tag {
+    width: 90px;
+    margin-left: 10px;
+    vertical-align: bottom;
+  }
+</style>

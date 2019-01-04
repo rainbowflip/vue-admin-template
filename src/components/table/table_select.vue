@@ -2,7 +2,7 @@
   <div>
     <div style="margin: 10px">
         <el-button size='small' type="primary" @click="delSelected()">删除选中</el-button>
-        <el-button size='small' type="primary" @click="backtoresults()">返回结果页面</el-button>
+        <el-button size='small' type="primary" @click="backtoresults()">返回</el-button>
     </div>
     <el-table
         ref="multipleTable"
