@@ -5,6 +5,7 @@
         <el-button size='small' type="primary" @click="backtoresults()">返回</el-button>
     </div>
     <el-table
+        v-loading="listLoading"
         ref="multipleTable"
         :data="results"
         tooltip-effect="dark"
@@ -15,20 +16,21 @@
         width="55">
         </el-table-column>
         <el-table-column
-        label="日期"
+        label="starttime"
         width="120">
-        <template slot-scope="scope">{{ scope.row.date }}</template>
+        <template slot-scope="scope">{{ scope.row.starttime }}</template>
         </el-table-column>
         <el-table-column
         prop="name"
-        label="姓名"
+        label="分类"
         width="120">
+        <template slot-scope="scope">{{ scope.row.category }}</template>
         </el-table-column>
         <el-table-column
         label="路径"
         show-overflow-tooltip>
             <template slot-scope="scope">
-                <span class="link-type" @click="handleUpdate(scope.row)">{{ scope.row.address }}</span>
+                <span class="link-type" @click="handleUpdate(scope.row.url)">{{ scope.row.url }}</span>
             </template>
         </el-table-column>
     </el-table>
@@ -43,20 +45,20 @@
         tableData3: [{
           date: '2016-05-03',
           name: 'star',
-          address: '1.mp4'
+          address: '3.mp4'
         }, {
           date: '2016-05-02',
           name: 'star',
-          address: '1.mp4'
+          address: '3.mp4'
         }, {
           date: '2016-05-04',
           name: 'star',
-          address: '1.mp4'
+          address: '3.mp4'
         }],
         multipleSelection: []
       }
     },
-    props:['results'],
+    props:['results','listLoading'],
     methods: {
         backtoresults() {
             this.$router.go(-1)
@@ -73,6 +75,10 @@
         handleSelectionChange(val) {
         console.log(val);
         this.multipleSelection = val;
+        },
+        handleUpdate(url){
+          console.log(url)
+          this.$emit("changesrc",url)
         }
     }
   }

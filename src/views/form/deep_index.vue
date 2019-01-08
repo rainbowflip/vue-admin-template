@@ -1,5 +1,5 @@
 <template>
-    <Taskform style="width:800px" :data="form"></Taskform>
+    <Taskform style="width:800px" :form="form"></Taskform>
 </template>
 <script>
 import Taskform from '@/components/Taskform/index'
@@ -9,13 +9,14 @@ export default {
         return{
             form: {
                 name: '',
+                url: 'static/videos/',
                 region: '',
                 date1: '',
                 date2: '',
                 delivery: false,
                 type: [],
-                resource: '',
-                desc: ''
+                tag: 'Face',
+                desc: 'fufufufufuffu'
             }
         }
     },

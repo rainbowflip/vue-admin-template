@@ -2,16 +2,16 @@ import request from '@/utils/request'
 
 export function settasks(params){
     return request({
-        url:"setasks",
+        url:"settasks/",
         method:"post",
-        params
+        data:params
     })
 }
 
 export function settags(params){
     return request({
-        url:"settags",
+        url:"settags/",
         method:"post",
-        params
+        data:params
     })
 }
