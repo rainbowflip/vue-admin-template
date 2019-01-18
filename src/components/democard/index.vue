@@ -6,8 +6,8 @@
                     <img :src="item.img" :alt="item.alt">
                     <figcaption>
                         <h3>{{ item.title }}</h3>
-                        <span>{{ item.details }}</span><br/>
-                        <span>{{ item.details }}</span>
+                        <span>{{ item.details1 }}</span><br/>
+                        <span>{{ item.details2 }}</span>
                         <a :href="item.url">即刻试用&gt;&gt;&gt;</a>
                     </figcaption>
                 </figure>
@@ -22,38 +22,10 @@ export default {
     name:'democard',
     data() {
         return {
-            demos:[
-                {
-                    'img':'static/images/王者荣耀角色.jpg',
-                    'alt':'img04',
-                    'url':'/demo/gameImg',
-                    'title':'王者荣耀的人物与场景检测',
-                    'details':'王者荣耀的人物与场景检测'
-                },
-                {
-                    'img':'static/images/王者荣耀角色.jpg',
-                    'alt':'img04',
-                    'url':'/demo/gameImg',
-                    'title':'王者荣耀的人物与场景检测',
-                    'details':'王者荣耀的人物与场景检测'
-                },
-                {
-                    'img':'static/images/王者荣耀角色.jpg',
-                    'alt':'img04',
-                    'url':'/demo/gameImg',
-                    'title':'王者荣耀的人物与场景检测',
-                    'details':'王者荣耀的人物与场景检测'
-                },
-                {
-                    'img':'static/images/王者荣耀角色.jpg',
-                    'alt':'img04',
-                    'url':'/demo/gameImg',
-                    'title':'王者荣耀的人物与场景检测',
-                    'details':'王者荣耀的人物与场景检测'
-                }
-            ]
+
         }
-    }
+    },
+    props:['demos']
 }
 </script>
 

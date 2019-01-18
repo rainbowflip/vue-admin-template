@@ -16,7 +16,7 @@
       highlight-current-row>
       <el-table-column align="center" label="ID" width="95">
         <template slot-scope="scope">
-          {{ scope.$index }}
+          <!-- {{ scope.$index }} -->
           {{ scope.row.id }}
         </template>
       </el-table-column>
@@ -45,10 +45,10 @@
           <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="Display_time" width="200">
+      <el-table-column align="center" prop="created_at" label="Display_time" width="200"  fixed="right">
         <template slot-scope="scope">
           <i class="el-icon-time"/>
-          <span>{{ scope.row.date }}</span>
+          <span>{{ scope.row.date|parseTime('{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
         <el-table-column
@@ -58,7 +58,7 @@
         width="150">
         <template slot-scope="scope" :runningid="runnningid">
           <el-button @click="gotoResults(scope.row.id)" type="text" size="small">查看</el-button>
-          <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
+          <!-- <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button> -->
           <el-button @click="handleStop(scope.row.id)" v-if="runningid==scope.row.id" type="text" size="small">stop</el-button>
           <el-button @click="handleStart(scope.row.id)" v-else :disabled="runningid!=null && runningid!=scope.row.id" type="text" size="small">start</el-button>
           <el-button
@@ -105,14 +105,15 @@ export default {
       title:"",
       total: 0,
       runningid:null,
-      listLoading: true,
+      listLoading: false,
       listQuery: {
         page: 1,
         limit: 30,
         importance: undefined,
         title: undefined,
         type: undefined,
-        sort: '-id'
+        sort: '-id',
+        tag:undefined
       },
       dialogFormVisible: false,
       downloadLoading: false,
@@ -120,24 +121,22 @@ export default {
     }
   },
   created() {
-    this.fetchData()
-
+    // this.fetchData()
   },
   methods: {
     fetchData() {
       this.listLoading = true
       getTaskList(this.listQuery).then(response => {
-        console.log(response.data)
         this.list = response.data.items
         this.listLoading = false
         this.total = response.data.total
         if(response.data.runningid){
           this.runningid = parseInt(response.data.runningid)
+        }else{
+          this.runningid = null
         }
         // Just to simulate the time of the request
-        setTimeout(() => {
           this.listLoading = false
-        }, 1.5 * 1000)
       })
     },
     handleClick(row) {
@@ -155,17 +154,26 @@ export default {
     },
     handleDownload() {
       this.downloadLoading = true
-      // import('@/vendor/Export2Excel').then(excel => {
-      //   const tHeader = ['timestamp', 'title', 'type', 'importance', 'status']
-      //   const filterVal = ['timestamp', 'title', 'type', 'importance', 'status']
-      //   const data = this.formatJson(filterVal, this.list)
-      //   excel.export_json_to_excel({
-      //     header: tHeader,
-      //     data,
-      //     filename: 'table-list'
-      //   })
-      //   this.downloadLoading = false
-      // })
+      import('@/vendor/Export2Excel').then(excel => {
+        const tHeader = ["category", "conf", "time_s", "url", "taskid", "time_e", "starttime", "id", "desc"]
+        const filterVal = ["category", "conf", "time_s", "url", "taskid", "time_e", "starttime", "id", "desc"]
+        const data = this.formatJson(filterVal, this.list)
+        excel.export_json_to_excel({
+          header: tHeader,
+          data,
+          filename: 'table-list'
+        })
+        this.downloadLoading = false
+      })
+    },
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => {
+        if (j === 'timestamp') {
+          return parseTime(v[j])
+        } else {
+          return v[j]
+        }
+      }))
     },
     gotoResults(id) {
       this.$router.push({path:'/results/index',query:{'id':id}})
@@ -175,6 +183,7 @@ export default {
       this.$router.go(-1)
     },
     handleDelete(index, id) {
+      
       deltask({"id":id}).then(response => {
         console.log(response.data)
         this.$message({

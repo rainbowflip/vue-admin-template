@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie'
-
+console.log(Cookies.get('sidebarStatus'),"---------")
 const app = {
   state: {
     sidebar: {

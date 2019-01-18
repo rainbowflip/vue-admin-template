@@ -31,6 +31,7 @@ export const constantRouterMap = [
     redirect: '/dashboard',
     name: 'Dashboard',
     hidden: true,
+    // hidden: false,
     children: [{
       path: 'dashboard',
       component: () => import('@/views/dashboard/index')
@@ -60,7 +61,7 @@ export const constantRouterMap = [
       {
         path: 'table',
         name: 'Table',
-        component: () => import('@/views/table/index'),
+        component: () => import('@/components/table/index'),
         meta: { title: 'Table', icon: 'table' }
       },
       // {
@@ -80,7 +81,7 @@ export const constantRouterMap = [
       {
         path: 'index',
         name: 'Results',
-        component: () => import('@/views/table/results'),
+        component: () => import('@/components/table/results'),
         meta: { title: 'results', icon: 'eye' }
       }
     ]

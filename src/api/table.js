@@ -3,8 +3,8 @@ import request from '@/utils/request'
 export function getTaskList(params) {
   return request({
     url: '/table/tasks',
-    method: 'get',
-    params
+    method: 'post',
+    data:params
   })
 }
 
@@ -16,10 +16,12 @@ export function getResultsList(params) {
   })
 }
 
-export function initResult(params) {
+export function delSelected(params) {
   return request({
-    url: '/table/initresult',
-    method: 'get',
-    params
+    url:"/table/delresults",
+    method:"post",
+    data:{
+      params
+    }
   })
 }

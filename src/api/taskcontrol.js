@@ -23,3 +23,11 @@ export function deltask(params) {
   })
 }
 
+export function set_and_start(params){
+  return request({
+    url:"/set_and_start/",
+    method: 'post',
+    data:params
+  })
+}
+

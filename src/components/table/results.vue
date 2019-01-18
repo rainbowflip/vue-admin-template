@@ -5,8 +5,8 @@
       <split-pane split="vertical">
         <template slot="paneL">
           <div class="top-container">
-            <tableSelect :results="results" :listLoading="listLoading" @changesrc="changesrc"></tableSelect>
-            <pagination align="center" v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="fetchData" />
+            <tableSelect class="tableselect" :results="results" :listLoading="listLoading" @changesrc="changesrc"></tableSelect>
+            <pagination class="paginator-abs" align="center" v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="fetchData" />
           </div>
         </template>
         <template slot="paneR">
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import { getResultsList,initResult } from '@/api/table'
+  import { getResultsList } from '@/api/table'
   import splitPane from 'vue-splitpane'
   import tableSelect from '@/components/table/table_select'
   import Pagination from '@/components/Pagination' 
@@ -62,26 +62,8 @@
       }
       this.listLoading = false
       console.log("this.listquery",this.listQuery)
-      initResult(this.listQuery).then(response=>{
-          console.log("***********",response.data)
-          let res = response.data
-          this.listLoading = false
-          this.results = res.items
-          this.running = res.running
-          if(this.running){
-            try {
-              this.percentage = parseFloat((res.currentframe*100 / res.totalframes).toFixed(2))
-            } catch (error) {
-              this.percentage = 0
-            }
-            if(this.interval==null){
-              this.interval = setInterval(()=>{this.fetchData()},5000)
-            }
-          }else{
-            clearInterval(this.interval)
-          }
-      })
-      // this.fetchData()
+
+      this.fetchData()
     },
     methods: {
       resize() {
@@ -95,20 +77,15 @@
 
       },
       fetchData() {
-      
         // this.total = this.results.length;
         getResultsList(this.listQuery).then(response => {
           let res = response.data
           console.log("***********",res)
-          this.results = [...this.results,...res.items]
+          this.results = res.items
           this.running = res.running
+          this.total = res.total
           if(this.running){
-            try {
-              this.percentage = parseFloat((res.currentframe*100 / res.totalframes).toFixed(2))
-            } catch (error) {
-              this.percentage = 0
-            }
-            
+            this.percentage = res.currentframe ? parseFloat((res.currentframe*100 / res.totalframes).toFixed(2)) : 0
             if(this.interval==null){
               this.interval = setInterval(()=>{this.fetchData()},5000)
             }
@@ -118,8 +95,7 @@
         })
       },
       changesrc(val){
-        console.log("fufufufu")
-        this.url = "http://ai.gemfield.org:5667/"+val
+        this.url = val.url
       }
     },
     destroyed(){
@@ -135,7 +111,6 @@
   }
   .left-container,.right-container,.bottom-container{
     overflow: hidden;
-    
   }
   ::-webkit-scrollbar {/*滚动条整体样式*/
         width: 8px;     /*高宽分别对应横竖滚动条的尺寸*/
@@ -166,6 +141,16 @@
     width: 100%;
     height: 100%;
     overflow: scroll;
+  }
+
+  .tableselect{
+    margin-bottom: 100px
+  }
+
+  .paginator-abs{
+    position:absolute;
+    bottom:0;
+    width:100%
   }
 
   .bottom-container {
