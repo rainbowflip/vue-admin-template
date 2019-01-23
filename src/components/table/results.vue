@@ -19,6 +19,7 @@
     <template slot="paneR">
       <div class="left-container">
         <el-progress :text-inside="true" :stroke-width="18" v-if="running" :percentage="percentage"></el-progress>
+        <echarts :echartsdata="results"></echarts>
       </div>
     </template>
   </split-pane>
@@ -30,10 +31,11 @@
   import splitPane from 'vue-splitpane'
   import tableSelect from '@/components/table/table_select'
   import Pagination from '@/components/Pagination' 
+  import echarts from '@/components/echarts'
 
   export default {
     name: 'SplitpaneDemo',
-    components: { splitPane,tableSelect,Pagination },
+    components: { splitPane,tableSelect,Pagination,echarts },
     data (){
       return{
         results:[],

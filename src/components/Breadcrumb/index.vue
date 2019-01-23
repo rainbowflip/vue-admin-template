@@ -25,6 +25,7 @@ export default {
   },
   created() {
     this.getBreadcrumb()
+    console.log("item.meata.title---",this.$route.meta.title)
   },
   methods: {
     getBreadcrumb() {
@@ -34,9 +35,9 @@ export default {
         }
       })
       const first = matched[0]
-      if (first && first.name !== 'dashboard') {
-        matched = [{ path: '/dashboard', meta: { title: 'Dashboard' }}].concat(matched)
-      }
+      // if (first && first.name !== 'dashboard') {
+      //   matched = [{ path: '/dashboard', meta: { title: 'Home' }}].concat(matched)
+      // }
       this.levelList = matched
     },
     pathCompile(path) {
@@ -60,11 +61,12 @@ export default {
 <style rel="stylesheet/scss" lang="scss" scoped>
   .app-breadcrumb.el-breadcrumb {
     display: inline-block;
-    font-size: 14px;
+    font-size: 26px;
     line-height: 50px;
     margin-left: 10px;
+    font-weight: 500;
     .no-redirect {
-      color: #97a8be;
+      color: #333;
       cursor: text;
     }
   }

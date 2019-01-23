@@ -17,39 +17,54 @@ export default {
     return{
       demos:[
           {
-              'img':'static/images/王者荣耀角色.jpg',
+              'img':'/static/images/volleyball.jpg',
               'alt':'img04',
-              'url':'/demo/gameImg',
+              'url':'/#/product/volleyball?tag=volleyball',
+              'title':'volleyball的人物与场景检测',
+              'details1':'高效检测游戏画面中出现的',
+              'details2':'角色和场景并且直观展示'
+          },
+          {
+              'img':'/static/images/王者荣耀角色.jpg',
+              'alt':'img04',
+              'url':'/#/product/wzry?tag=wzry',
               'title':'王者荣耀的人物与场景检测',
               'details1':'高效检测游戏画面中出现的',
               'details2':'角色和场景并且直观展示'
           },
           {
-              'img':'static/images/portfolio_pic3.jpg',
+              'img':'/static/images/portfolio_pic3.jpg',
               'alt':'img04',
-              'url':'/demo/gameImg',
+              'url':'/#/product/game?tag=game',
               'title':'游戏视频的人物与场景检测(内部使用)',
               'details1':'复杂游戏数据展示',
               'details2':'快与我们取得联系，获得测试资格'
           },
           {
-              'img':'static/images/food2.jpg',
+              'img':'/static/images/food2.jpg',
               'alt':'img04',
-              'url':'/demo/gameImg',
+              'url':'/#/product/food?tag=food',
               'title':'食谱检测',
               'details1':'分析图像中出现的食物',
               'details2':'并且直观展示'
-
           },
           {
-              'img':'static/images/portfolio_pic5.jpg',
+              'img':'/static/images/portfolio_pic5.jpg',
               'alt':'img04',
-              'url':'/demo/gameImg',
+              'url':'/#/product/helmet?tag=helmet',
               'title':'安全帽检测',
               'details1':'准确高效的检测图像中出现的',
               'details2':'安全帽佩戴情况并且直观展示'
 
-          }
+          },
+          {
+              'img':'/static/images/expression.jpg',
+              'alt':'img04',
+              'url':'/#/product/expression?tag=expression',
+              'title':'表情识别',
+              'details1':'分析图像中出现的人物表情',
+              'details2':'并给出相应结果'
+          },
       ]
     }
   },

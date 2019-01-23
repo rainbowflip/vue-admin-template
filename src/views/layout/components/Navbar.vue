@@ -2,6 +2,7 @@
   <sticky class-name="sub-navbar">
   <el-menu class="navbar" mode="horizontal">
     <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/>
+    <!-- <Backico /> -->
     <breadcrumb />
     <!-- <span>deepait</span> -->
     <el-dropdown class="avatar-container" trigger="click">
@@ -29,11 +30,13 @@ import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import Sticky from '@/components/Sticky'
+// import Backico from '@/componnets/Backico'
 export default {
   components: {
     Breadcrumb,
     Hamburger,
-    Sticky
+    Sticky,
+    // Backico
   },
   computed: {
     ...mapGetters([
@@ -59,6 +62,7 @@ export default {
   height: 50px;
   line-height: 50px;
   border-radius: 0px !important;
+  text-align: center;
   .hamburger-container {
     line-height: 58px;
     height: 50px;

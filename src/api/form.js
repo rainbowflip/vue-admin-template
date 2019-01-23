@@ -15,3 +15,12 @@ export function settags(params){
         data:params
     })
 }
+
+export function imgUpload(params){
+    return request({
+        url:"http://ai.gemfield.org:5653/seg/cartoon/",
+        method:"post",
+        mode:"cors",
+        data:params
+    })
+}

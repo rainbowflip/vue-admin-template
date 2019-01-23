@@ -1,3 +1,6 @@
+import { resolve } from "path";
+import { reject } from "q";
+
 /**
  * Created by jiachenpan on 16/11/18.
  */

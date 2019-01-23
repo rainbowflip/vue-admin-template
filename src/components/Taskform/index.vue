@@ -59,7 +59,7 @@ export default {
     components:{ Tasklist },
     data (){
         return{
-            tag:"wzry",
+            tag:"",
             checkedfolders:[],
             folders:[],
             checkedfile:'',
@@ -71,11 +71,11 @@ export default {
     },
     // props:['filestree']
     created() {
-        console.log("created-=-=-=-=-=-",this.tag)
+        this.tag = this.$route.query.tag
         getfolder({"tag":this.tag}).then(response=>{
             this.folders = response.data.folders
             this.checkedfolders = []
-            this.$refs.tasklist.listQuery.tag = this.tag
+            this.$refs.tasklist.listQuery.tag = this.$route.query.tag
             console.log(this.$refs.tasklist.listQuery)
         })
     },
@@ -85,9 +85,12 @@ export default {
             return this.checkedfile == ""
         }
     },
-    watch:{
-        this.checkedfolders:{showfiles()}
-    },
+    // watch:{
+    //     checkedfolders:function(){
+    //         console.log("watch watch")
+    //         showfiles()
+    //         }
+    // },
     methods :{
         showfiles() {
             console.log("showfiles-----",this.checkedfolders.length)
@@ -120,6 +123,7 @@ export default {
                 this.checkedfolders = this.folders
             }
             this.selectall = !this.selectall
+            this.showfiles()
         },
         set_to_start(){
             console.log("set_and_start")

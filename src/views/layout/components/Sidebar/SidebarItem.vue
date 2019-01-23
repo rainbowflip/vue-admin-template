@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!item.hidden&&item.children" class="menu-wrapper">
+  <div v-if="!item.hidden&&item.children" class="menu-wrapper" >
 
     <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
       <app-link :to="resolvePath(onlyOneChild.path)">
@@ -20,10 +20,10 @@
           :is-nest="true"
           :item="child"
           :key="child.path"
-          :base-path="resolvePath(child.path)"
+          :base-path="resolvePath(child.path,child.name)"
           class="nest-menu" />
-        <app-link v-else :to="resolvePath(child.path)" :key="child.name">
-          <el-menu-item :index="resolvePath(child.path)">
+        <app-link v-else :to="resolvePath(child.path,child.name)" :key="child.name">
+          <el-menu-item :index="resolvePath(child.path,child.name)">
             <item v-if="child.meta" :icon="child.meta.icon" :title="child.meta.title" />
           </el-menu-item>
         </app-link>
@@ -63,6 +63,9 @@ export default {
     }
   },
   methods: {
+    toggleSideBar() {
+      this.$store.dispatch('ToggleSideBar')
+    },
     hasOneShowingChild(children, parent) {
       const showingChildren = children.filter(item => {
         if (item.hidden) {
@@ -84,14 +87,13 @@ export default {
         this.onlyOneChild = { ... parent, path: '', noShowingChildren: true }
         return true
       }
-
       return false
     },
-    resolvePath(routePath) {
+    resolvePath(routePath,tagname) {
       if (this.isExternalLink(routePath)) {
         return routePath
       }
-      return path.resolve(this.basePath, routePath)
+      return path.resolve(this.basePath, routePath+ (tagname!=undefined?"?tag="+tagname:''))
     },
     isExternalLink(routePath) {
       return isExternal(routePath)
