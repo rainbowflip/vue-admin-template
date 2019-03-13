@@ -31,6 +31,7 @@ export const constantRouterMap = [
     redirect: '/dashboard',
     name: 'Dashboard',
     hidden: false,
+    meta:{title:"多模态剪辑系统"},
     children: [{
       path: 'dashboard',
       component: () => import('@/views/dashboard/index'),

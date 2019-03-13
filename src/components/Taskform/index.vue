@@ -2,7 +2,7 @@
     <div style="width:100%">
         <el-row class="el-row-folder" :gutter="20">
             <el-col :span="7" >
-                <span>文件夹</span><br>
+                <span>分类</span><br>
                 <div style="margin:10px">
                     <el-button size='mini' @click="toggleall">全选</el-button>
 
@@ -12,7 +12,7 @@
                 </div>
             </el-col>
             <el-col :span="7">
-                <span>文件</span><br>
+                <span>视频文件</span><br>
                 <div style="margin:10px">
                    <el-input placeholder="请输入内容" v-model="searchInput" size="mini" class="input-with-select">
                         <el-button slot="append" icon="el-icon-search"></el-button>

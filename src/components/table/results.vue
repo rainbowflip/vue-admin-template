@@ -20,6 +20,7 @@
       <div class="left-container">
         <el-progress :text-inside="true" :stroke-width="18" v-if="running" :percentage="percentage"></el-progress>
         <echarts :echartsdata="results"></echarts>
+        <echartspie :echartsdata="results"></echartspie>
       </div>
     </template>
   </split-pane>
@@ -31,11 +32,12 @@
   import splitPane from 'vue-splitpane'
   import tableSelect from '@/components/table/table_select'
   import Pagination from '@/components/Pagination' 
-  import echarts from '@/components/echarts'
+  import echarts from '@/components/echarts/index'
+  import echartspie from '@/components/echarts/pie'
 
   export default {
     name: 'SplitpaneDemo',
-    components: { splitPane,tableSelect,Pagination,echarts },
+    components: { splitPane,tableSelect,Pagination,echarts,echartspie },
     data (){
       return{
         results:[],
@@ -131,11 +133,13 @@
   .left-container {
     /* background-color: #F38181; */
     height: 100%;
+    overflow: auto;
   }
 
   .right-container {
     /* background-color: #FCE38A; */
-    height: 200px;
+    height: 200px;   
+    overflow: auto;
   }
 
   .top-container {

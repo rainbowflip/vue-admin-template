@@ -1,5 +1,5 @@
 <template>
-    <div id="main" ref="main"></div>
+    <div id="pie" ref="pie"></div>
 </template>
 
 <script>
@@ -15,7 +15,7 @@ const types_ = [
     {'item3': '#75d874'}
 ]
 export default {
-    name:"echarts",
+    name:"echartspie",
     data(){
         return{
             myEcharts:'', //echarts实例
@@ -168,7 +168,7 @@ export default {
     props:['echartsdata'],
     mounted(){
         // console.log(this.$refs.main)
-        this.myEcharts = echarts.init(this.$refs.main)
+        this.myEcharts = echarts.init(this.$refs.pie)
         // console.log("========this.myEcharts,",this.option.series[0].data)
         // this.option.series[0].data = this.echartsdata.map(function(item,index){
         //     return {
@@ -214,7 +214,7 @@ export default {
 </script>
 
 <style>
-#main{
+#pie{
     margin:0 auto;
     width:80vw;
     height:300px;
